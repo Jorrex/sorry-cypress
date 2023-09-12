@@ -9,6 +9,7 @@ export enum HookType {
   BITBUCKET_STATUS_HOOK = 'BITBUCKET_STATUS_HOOK',
   TEAMS_HOOK = 'TEAMS_HOOK',
   GCHAT_HOOK = 'GCHAT_HOOK',
+  DISCORD_HOOK = 'DISCORD_HOOK'
 }
 
 export enum HookEvent {
@@ -22,7 +23,14 @@ export enum HookEvent {
 export enum ResultFilter {
   ALL = 'ALL',
   ONLY_FAILED = 'ONLY_FAILED',
-  ONLY_SUCCESSFUL = 'ONLY_SUCCESSFUL',
+  ONLY_SUCCESSFUL = 'ONLY_SUCCESSFUL'
+}
+
+export enum ResultTypes {
+  ALL = 'ALL',
+  FAILED = 'FAILED',
+  SUCCESSFUL = 'SUCCESSFUL',
+  FLAKES = 'FLAKES'
 }
 
 type BaseHook = {
@@ -71,15 +79,23 @@ export type GChatHook = BaseHook & {
   hookType: HookType.GCHAT_HOOK;
 };
 
+export type DiscordHook = BaseHook & {
+  hookEvents: HookEvent[];
+  hookType: HookType.DISCORD_HOOK;
+  discordResultFilter: ResultTypes | null;
+}
+
 export type HookWithCustomEvents =
   | SlackHook
   | TeamsHook
   | GenericHook
-  | GChatHook;
+  | GChatHook
+  | DiscordHook;
 export type Hook =
   | SlackHook
   | TeamsHook
   | GenericHook
   | GithubHook
   | BitBucketHook
-  | GChatHook;
+  | GChatHook
+  | DiscordHook;

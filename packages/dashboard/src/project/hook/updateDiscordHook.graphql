@@ -1,0 +1,5 @@
+mutation updateDiscordHook($input: UpdateDiscordHookInput!) {
+  updateDiscordHook(input: $input) {
+    hookId
+  }
+}

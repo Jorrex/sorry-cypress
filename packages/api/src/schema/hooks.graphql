@@ -11,6 +11,8 @@ type Mutation {
   updateTeamsHook(input: UpdateTeamsHookInput!): TeamsHook!
   createGChatHook(input: CreateGChatHookInput!): GChatHook!
   updateGChatHook(input: UpdateGChatHookInput!): GChatHook!
+  createDiscordHook(input: CreateDiscordHookInput!): DiscordHook!
+  updateDiscordHook(input: UpdateDiscordHookInput!): DiscordHook!
   deleteHook(input: DeleteHookInput!): DeleteHookResponse!
 }
 
@@ -158,6 +160,28 @@ input UpdateGChatHookInput {
   hookEvents: [String!]!
 }
 
+type DiscordHook {
+  projectId: ID!
+  hookId: ID!
+  url: String!
+  hookType: DiscordHookType!
+  hookEvents: [String!]!
+  discordResultFilter: DiscordResultFilter
+}
+
+input CreateDiscordHookInput {
+  projectId: ID!
+  discordResultFilter: DiscordResultFilter = "ALL"
+}
+
+input UpdateDiscordHookInput {
+  projectId: ID!
+  hookId: ID!
+  url: String!
+  hookEvents: [String!]!
+  discordResultFilter: DiscordResultFilter
+}
+
 type Hook {
   hookId: String
   url: String
@@ -175,6 +199,7 @@ type Hook {
   bitbucketBuildName: String
   slackResultFilter: String
   slackBranchFilter: [String]
+  discordResultFilter: String
 }
 
 input HookInput {
@@ -194,6 +219,7 @@ input HookInput {
   bitbucketBuildName: String
   slackResultFilter: String
   slackBranchFilter: [String]
+  discordResultFilter: String
 }
 
 scalar GenericHookType
@@ -203,3 +229,5 @@ scalar GithubHookType
 scalar BitbucketHookType
 scalar TeamsHookType
 scalar GChatHookType
+scalar DiscordHookType
+scalar DiscordResultFilter

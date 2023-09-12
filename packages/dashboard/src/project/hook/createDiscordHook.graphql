@@ -1,0 +1,9 @@
+mutation createDiscordHook($input: CreateDiscordHookInput!) {
+  createDiscordHook(input: $input) {
+    hookId
+    hookType
+    url
+    hookEvents,
+    discordResultFilter
+  }
+}

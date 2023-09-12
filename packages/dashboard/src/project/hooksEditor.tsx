@@ -20,6 +20,7 @@ import {
   useCreateGithubHookMutation,
   useCreateSlackHookMutation,
   useCreateTeamsHookMutation,
+  useCreateDiscordHookMutation
 } from '@sorry-cypress/dashboard/generated/graphql';
 import React, { useState } from 'react';
 import { InputFieldLabel, Paper } from '../components';
@@ -47,6 +48,7 @@ export const HooksEditor = () => {
   const [createSlackHook] = useCreateSlackHookMutation();
   const [createTeamsHook] = useCreateTeamsHookMutation();
   const [createGChatHook] = useCreateGChatHookMutation();
+  const [createDiscordHook] = useCreateDiscordHookMutation();
 
   async function createNewHook() {
     const input = {
@@ -59,7 +61,9 @@ export const HooksEditor = () => {
       | typeof createSlackHook
       | typeof createTeamsHook
       | typeof createGChatHook
+      | typeof createDiscordHook
       | null = null;
+
     let field = '';
     switch (currentHookType) {
       case HookType.SLACK_HOOK:
@@ -92,6 +96,11 @@ export const HooksEditor = () => {
       case HookType.GCHAT_HOOK:
         fn = createGChatHook;
         field = 'createGChatHook';
+        setCurrentHookType(undefined);
+        break;
+      case HookType.DISCORD_HOOK:
+        fn = createDiscordHook;
+        field = 'createDiscordHook';
         setCurrentHookType(undefined);
         break;
       default:

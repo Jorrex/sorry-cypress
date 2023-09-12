@@ -10,6 +10,7 @@ import { getDashboardRunURL } from '@sorry-cypress/director/lib/urls';
 import { getLogger } from '@sorry-cypress/logger';
 import axios from 'axios';
 import { truncate } from 'lodash';
+import { discordResultValidation } from './validation';
 
 interface SlackReporterEventPayload {
   eventType: HookEvent;

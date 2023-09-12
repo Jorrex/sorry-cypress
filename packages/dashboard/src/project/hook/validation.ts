@@ -2,6 +2,7 @@ import {
   getBitbucketBuildUrl,
   getGithubConfiguration,
   ResultFilter,
+  ResultTypes,
 } from '@sorry-cypress/common';
 
 export const bitbucketUrlValidation = (value: string) => {
@@ -52,3 +53,10 @@ export const slackResultValidation = (value: string) => {
   }
   return 'Please select an item';
 };
+
+export const discordResultValidation = (value: string) => {
+  if (Object.values(ResultTypes).includes(value as ResultTypes)) {
+    return true;
+  }
+  return 'Please select an item.';
+}

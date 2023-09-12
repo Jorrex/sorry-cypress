@@ -7,6 +7,7 @@ import {
   isGithubHook,
   isSlackHook,
   isTeamsHook,
+  isDiscordHook,
   Project,
   Run,
   RunGroupProgress,
@@ -18,6 +19,7 @@ import { reportToGenericWebHook } from './generic';
 import { reportStatusToGithub } from './github';
 import { reportToSlack } from './slack';
 import { reportToTeams } from './teams';
+import { reportToDiscord } from './discord';
 
 interface ReportHooksParams {
   eventType: HookEvent;
@@ -137,6 +139,16 @@ const runSingleReporter = async ({
       groupId,
       groupProgress,
       spec: spec ?? '',
+    });
+  }
+
+  if (isDiscordHook(hook)) {
+    return reportToDiscord(hook, {
+      eventType,
+      run,
+      groupId,
+      groupProgress,
+      spec: spec ?? ''
     });
   }
   // throw new AppError(UNKNOWN_HOOK_TYPE);

@@ -6,6 +6,7 @@ import {
   Hook,
   SlackHook,
   TeamsHook,
+  DiscordHook
 } from './types';
 
 export function isGenericHook(hook: Hook): hook is GenericHook {
@@ -30,4 +31,8 @@ export function isTeamsHook(hook: Hook): hook is TeamsHook {
 
 export function isGChatHook(hook: Hook): hook is GChatHook {
   return hook.hookType === 'GCHAT_HOOK';
+}
+
+export function isDiscordHook(hook: Hook): hook is DiscordHook {
+  return hook.hookType === 'DISCORD_HOOK';
 }

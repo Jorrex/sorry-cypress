@@ -7,6 +7,7 @@ import {
   CreateGChatHookInput,
   CreateGenericHookInput,
   CreateGithubHookInput,
+  CreateDiscordHookInput,
   CreateProjectInput,
   CreateSlackHookInput,
   CreateTeamsHookInput,
@@ -21,6 +22,7 @@ import {
   UpdateProjectInput,
   UpdateSlackHookInput,
   UpdateTeamsHookInput,
+  UpdateDiscordHookInput,
 } from '@sorry-cypress/api/generated/graphql';
 import { Project } from '@sorry-cypress/common';
 import { GraphQLScalarType } from 'graphql';
@@ -55,6 +57,7 @@ export const resolvers = {
   BitbucketHookType: getStringLiteral('BitbucketHookType'),
   TeamsHookType: getStringLiteral('TeamsHookType'),
   GChatHookType: getStringLiteral('GChatHookType'),
+  DiscordHookType: getStringLiteral('DiscordHookType'),
 
   RunSpec: {
     results: async (
@@ -282,6 +285,12 @@ export const resolvers = {
     ),
     updateGChatHook: getDatasourceWithInput<UpdateGChatHookInput>(
       'projectsAPI.updateGChatHook'
+    ),
+    createDiscordHook: getDatasourceWithInput<CreateDiscordHookInput>(
+      'projectsAPI.createDiscordHook'
+    ),
+    updateDiscordHook: getDatasourceWithInput<UpdateDiscordHookInput>(
+      'projectsAPI.updateDiscordHook'
     ),
     deleteHook: getDatasourceWithInput<DeleteHookInput>(
       'projectsAPI.deleteHook'

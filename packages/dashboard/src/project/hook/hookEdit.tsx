@@ -24,6 +24,7 @@ import {
   isGithubHook,
   isSlackHook,
   isTeamsHook,
+  isDiscordHook
 } from '@sorry-cypress/common';
 import { useDeleteHookMutation } from '@sorry-cypress/dashboard/generated/graphql';
 import { useSwitch } from '@sorry-cypress/dashboard/hooks/useSwitch';
@@ -37,6 +38,7 @@ import { enumToString } from './hook.utils';
 import { HookFormAction } from './hookFormReducer';
 import { SlackHook } from './slackHook';
 import { TeamsHook } from './teamsHook';
+import { DiscordHook } from './discordHook';
 
 const Toggler = ({ toggleExpanded, isExpanded, title }: any) => {
   return (
@@ -145,6 +147,7 @@ const HookDetails = ({ hook }: { hook: Hook }) => {
         {isBitbucketHook(hook) && <BitbucketHook hook={hook} />}
         {isTeamsHook(hook) && <TeamsHook hook={hook} />}
         {isGChatHook(hook) && <GChatHook hook={hook} />}
+        {isDiscordHook(hook) && <DiscordHook hook={hook} />}
       </Grid>
     </Grid>
   );
